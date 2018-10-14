@@ -12,15 +12,33 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.main');
+    $user = Auth::user();
+    return view('layouts.main', compact('user'));
 });
 
 Auth::routes();
 
-Route::group(['middleware' => ['role']], function(){
-    Route::resource('/profile', 'ProfileController');
+Route::group(['middleware' => ['auth']], function (){
+    Route::get('/profile', 'UserController@profile');
+    Route::post('/profile', 'UserController@upload_avatar')->name('upload');
+});
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function (){
+
+    Route::resource('/user', 'UserProfileController');
+
+    /*Route::resource('/coach', 'CoachProfileController');
+
+    Route::resource('/company', 'CompanyProfileController');*/
+
 });
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+
 

@@ -16,6 +16,6 @@ class Activity extends Model
 
     public function profile()
     {
-        return $this->belongsToMany(Profile::class);
+        return $this->belongsToMany(UserProfile::class);
     }
 }

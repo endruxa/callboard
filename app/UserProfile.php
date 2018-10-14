@@ -10,16 +10,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property \Carbon\Carbon $updated_at
  * @property mixed $activity
+ * @property mixed $user_role
+ * @property mixed user_id
  */
-class Profile extends Model
+class UserProfile extends Model
 {
 
-    const Role_USER = 1;
-    const Role_COACH = 2;
-    const Role_COMPANY = 3;
+    protected $fillable = ['first_name', 'last_name','description','user_id', 'slug'];
 
-    protected $fillable = ['first_name', 'last_name','description','user_id', 'role'];
 
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['description'] = $value;
+        $this->attributes['slug'] = str_slug(str_limit($value, 6));
+    }
 
     public function user()
     {
@@ -31,13 +35,5 @@ class Profile extends Model
         return $this->belongsToMany(Activity::class, 'activity_profile');
     }
 
-    public function getRouteKeyName()
-    {
-        return 'role';
-    }
 
-    public function user_role()
-    {
-        return $this->belongsTo(User::class, 'id');
-    }
 }

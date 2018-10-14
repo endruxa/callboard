@@ -12,10 +12,11 @@
     <!-- Styles -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
 </head>
 
-<body style="margin-top: 100px">
+<body class="main">
 
 <div id="app">
 
@@ -30,7 +31,7 @@
 
         <div class="row">
 
-            @section('activities')
+            @section('profile')
                 @include('layouts.partials._main_activities')
             @show
 

@@ -8,27 +8,8 @@
 
         <div class="container-fluid">
 
-            <form class="form-group" action="{{route('profile.store')}}" method="post" role="form" id="create-profile-form">
+            <form class="form-group" action="{{route('store_profile')}}" method="post" role="form" id="create-profile-form">
                 {{csrf_field()}}
-
-                <div class="form-row">
-                    <label for="role" class="col-md-4 col-form-label text-md-center">User Role</label>
-
-                    <div class="form-group col-md-4">
-                        <select class="form-control" name="role" id="role">
-                            <option value="no">No selected</option>
-                            <option value="1">User</option>
-                            <option value="2">Coach</option>
-                            <option value="3">Company</option>
-                        </select>
-                        @if ($errors->has('role'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('role') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
 
                 <div class="form-row">
                     <div class="form-group col-md-6">

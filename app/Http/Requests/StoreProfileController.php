@@ -27,7 +27,6 @@ class StoreProfileController extends FormRequest
     public function rules()
     {
         $rules = [
-            'role'        => 'required|integer',
             'first_name'  => 'required|string|min:3|max:30',
             'last_name'   => 'required|string|min:3|max:50',
             'description' => 'required|min:5|max:150'
