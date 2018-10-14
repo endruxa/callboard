@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProfileController;
 use App\Profile;
 use Illuminate\Http\Request;
 
@@ -29,14 +30,25 @@ class ProfileController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreProfileController $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreProfileController $request)
     {
-        //
+        try {
+            \DB::beginTransaction();
+            //get user_id
+            $request['user_id'] = $request->user()->id;
+            //store
+            $profile = Profile::create($request->all());
+            //attach to activity
+            /*$profile->activity()->attach($request->activity);*/
+            \DB::commit();
+        }catch (\Exception $e){
+            \DB::rollBack();
+            return back()->withInput()->withErrors('Profile is not created!');
+        }
+        return redirect()->route('profile.index')->withMessage('Profile Created!');
     }
 
     /**

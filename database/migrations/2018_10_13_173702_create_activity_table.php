@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePrivateDocumentsTable extends Migration
+class CreateActivityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreatePrivateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('private_documents', function (Blueprint $table) {
+        Schema::create('activity', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->string('description');
-            $table->string('where_live');
-            $table->string('time_zone');
-            $table->string('speeking_langages');
-
+            $table->string('main_activity');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreatePrivateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('private_documents');
+        Schema::dropIfExists('activity');
     }
 }

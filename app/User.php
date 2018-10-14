@@ -5,6 +5,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property mixed $profile
+ * @property \Carbon\Carbon $created_at
+ * @property int $id
+ * @property \Carbon\Carbon $updated_at
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -15,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role'
     ];
 
     /**
@@ -30,6 +36,11 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Profile::class, 'role');
     }
 
 }

@@ -17,14 +17,9 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
-            $table->string('gender');
-            $table->year('birth_date_day');
-            $table->integer('phone_number');
-            $table->string('preferred_language');
-            $table->string('currency');
-            $table->string('main_sport_type');
-            $table->string('additional_sports');
+            $table->string('description');
+            $table->unsignedInteger('user_id');
+            $table->tinyInteger('role');
             $table->timestamps();
         });
     }
