@@ -21,3 +21,15 @@
 
 </div>
 
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#main_activity').selectize();
+        });
+        $(function () {
+            $('#role').selectize();
+        })
+    </script>
+@endsection

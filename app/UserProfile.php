@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property int $id
  * @property \Carbon\Carbon $updated_at
- * @property mixed $activity
  * @property mixed $user_role
  * @property mixed user_id
  * @property mixed $comments
+ * @property mixed $activities
  */
 class UserProfile extends Model
 {
@@ -31,9 +31,9 @@ class UserProfile extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function activity()
+    public function activities()
     {
-        return $this->belongsToMany(Activity::class, 'activity_profile');
+        return $this->belongsToMany(Activity::class, 'activity_user_profiles', 'activity_id');
     }
 
 

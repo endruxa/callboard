@@ -52,12 +52,15 @@ class UserProfileController extends Controller
             $request['slug'] = str_slug($request['description']);
             //store
             $userProfile = UserProfile::create($request->all());
+            //add activity
+            $userProfile = \Auth::user();
+            $userProfile->activities()->sync($request->input('main_activity'));
             \DB::commit();
         }catch (\Exception $e){
             \DB::rollBack();
             return back()->withInput()->withErrors($e->getMessage());
         }
-        return redirect()->route('user.show', $userProfile->id)->withMessage('Profile Created!');
+        return redirect()->route('userProfile.show', $userProfile->id)->withMessage('Profile Created!');
     }
 
     /**
@@ -66,8 +69,8 @@ class UserProfileController extends Controller
      */
     public function show(UserProfile $userProfile)
     {
-        /*$user = \Auth::user();*/
-        return view('user_profile.single', compact('userProfile'));
+        $user = \Auth::user();
+        return view('user_profile.single', compact('userProfile', 'user'));
     }
 
     /**
@@ -76,7 +79,8 @@ class UserProfileController extends Controller
      */
     public function edit(UserProfile $userProfile)
     {
-        return view('user_profile.edit', compact('userProfile'));
+        $user = \Auth::user();
+        return view('user_profile.edit', compact('userProfile', 'user'));
     }
 
     /**
@@ -90,7 +94,7 @@ class UserProfileController extends Controller
 
         $userProfile->update($request->all());
 
-        return redirect()->route('user.index', $userProfile->id)->withMessage('Profile updated!');
+        return redirect()->route('userProfile.show', $userProfile->id)->withMessage('Profile updated!');
 
     }
 
