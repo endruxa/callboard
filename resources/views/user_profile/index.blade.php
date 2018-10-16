@@ -2,7 +2,7 @@
 
 @section('heading')
 
-        <a class="pull-right btn btn-sm btn-primary" href="{{route('user.create')}}">Create profile</a>
+        <a class="pull-right btn btn-sm btn-primary" href="{{route('userProfile.create')}}">Create profile</a>
 
 @endsection
 

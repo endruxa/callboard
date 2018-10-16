@@ -4,7 +4,7 @@
 
         <ul class="list-group">
 
-            <a href="{{route('user.create')}}" class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{route('userProfile.index')}}" class="list-group-item d-flex justify-content-between align-items-center">
                 Users
                 <span class="badge badge-primary badge-pill">3</span>
             </a>

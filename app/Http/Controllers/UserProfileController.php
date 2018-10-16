@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->middleware('auth')->except('index');
+    }
+
+
     /**
      * @param UserProfile $userProfile
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -16,7 +23,7 @@ class UserProfileController extends Controller
     public function index(UserProfile $userProfile)
     {
         $user = \Auth::user();
-        $userProfile = UserProfile::where('user_id', auth()->user()->id)->get();
+        $userProfile = UserProfile::with('user')->paginate(20);
         return view('user_profile.index', compact('userProfile', 'user'));
     }
 
@@ -50,7 +57,7 @@ class UserProfileController extends Controller
             \DB::rollBack();
             return back()->withInput()->withErrors($e->getMessage());
         }
-        return back()->withMessage('Profile Created!');
+        return redirect()->route('user.show', $userProfile->id)->withMessage('Profile Created!');
     }
 
     /**
@@ -59,7 +66,8 @@ class UserProfileController extends Controller
      */
     public function show(UserProfile $userProfile)
     {
-        return view('user_profile.show', compact('userProfile'));
+        /*$user = \Auth::user();*/
+        return view('user_profile.single', compact('userProfile'));
     }
 
     /**

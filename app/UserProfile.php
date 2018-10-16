@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $activity
  * @property mixed $user_role
  * @property mixed user_id
+ * @property mixed $comments
  */
 class UserProfile extends Model
 {
@@ -35,5 +36,10 @@ class UserProfile extends Model
         return $this->belongsToMany(Activity::class, 'activity_profile');
     }
 
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 
 }

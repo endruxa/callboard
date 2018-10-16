@@ -18,24 +18,28 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+
+
 Route::group(['middleware' => ['auth']], function (){
     Route::get('/profile', 'UserController@profile');
     Route::post('/profile', 'UserController@upload_avatar')->name('upload');
-});
 
-Route::get('/home', 'HomeController@index')->name('home');
+/*Route::group(['middleware' => ['auth']], function (){*/
 
-Route::group(['middleware' => ['auth']], function (){
-
-    Route::resource('/user', 'UserProfileController');
+    Route::resource('/userProfile', 'UserProfileController');
 
     /*Route::resource('/coach', 'CoachProfileController');
 
     Route::resource('/company', 'CompanyProfileController');*/
 
+/*});*/
+
+Route::resource('/comment', 'CommentController', ['only' => ['update', 'destroy']]);
+
+Route::post('/comment/create/{userProfile}', 'CommentController@addUserProfileComment')->name('userProfilecomment.store');
+
 });
-
-
 
 
 

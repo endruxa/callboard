@@ -17,14 +17,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $user_id
  * @property mixed $name
  * @property int $role_id
+ * @property mixed $avatar
+ * @property mixed $save
+ * @property mixed $pivot
  */
 class User extends Authenticatable
 {
     use Notifiable;
 
-    const ROLE_USER = 1;
-    const ROLE_COACH = 2;
-    const ROLE_COMPANY = 3;
     /**
      * The attributes that are mass assignable.
      *
@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function user_profile()
     {
-        return $this->hasOne(UserProfile::class);
+        return $this->hasMany(UserProfile::class);
     }
 
     public function roles()
@@ -53,14 +53,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_users');
     }
 
-    /*public function hasAccess(array $permissions)
+    //get users name from db in route
+    public function getRouteKeyName()
     {
-        foreach ($this->roles as $role) {
-            if ($role->hasAccess($permissions)){
-                return true;
-            }
-        }
-        return false;
-    }*/
+        return 'name';
+    }
 
 }
