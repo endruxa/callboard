@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Activity;
 use App\Http\Requests\StoreProfileController;
 use App\UserProfile;
 use App\User;
@@ -53,8 +54,9 @@ class UserProfileController extends Controller
             //store
             $userProfile = UserProfile::create($request->all());
             //add activity
-            $userProfile = \Auth::user();
-            $userProfile->activities()->sync($request->input('main_activity'));
+           $activities = $request->input('main_activity', []);
+
+           $userProfile->activities()->sync($activities);
             \DB::commit();
         }catch (\Exception $e){
             \DB::rollBack();

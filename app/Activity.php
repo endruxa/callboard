@@ -17,6 +17,6 @@ class Activity extends Model
 
     public function user_profiles()
     {
-        return $this->belongsToMany(UserProfile::class, 'activity_user_profiles', 'user_profiles_id');
+        return $this->belongsToMany(UserProfile::class, 'activity_user_profiles');
     }
 }
