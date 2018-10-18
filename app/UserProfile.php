@@ -33,7 +33,7 @@ class UserProfile extends Model
 
     public function activities()
     {
-        return $this->belongsToMany(Activity::class, 'activity_user_profiles', 'activity_id');
+        return $this->belongsToMany(Activity::class, 'activity_user_profiles');
     }
 
 
