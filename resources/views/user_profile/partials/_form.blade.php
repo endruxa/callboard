@@ -15,7 +15,7 @@
 
 <div class="form-group">
     <label for="main_activity">Activity</label>
-    <select class="form-control" multiple="" name="main_activity[]" id="main_activity">
+    <select class="form-control" multiple="multiple" name="main_activity[]" id="main_activity">
         <option value="1">Tennis</option>
         <option value="2">Paintball</option>
         <option value="3">Yoga</option>
