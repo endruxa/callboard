@@ -42,4 +42,8 @@ class UserProfile extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    public function getRouteKeyName()
+    {
+        return 'first_name';
+    }
 }
