@@ -5,21 +5,25 @@ namespace App\Http\Middleware;
 use App\Role;
 use App\User;
 use Closure;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class RoleMiddleware
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @param null $role
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role = null)
     {
-        if (auth()->user()->pivot->user_id == Role::ROLE_USER){
-            return redirect(route('upload'));
+        $user = \Auth::user();
+        if ($user && $role == 1) {
+            return redirect('/userProfile');
         }
-        return $next($request);
+
+        return redirect('/');
     }
 }

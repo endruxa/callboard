@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('/profile', 'UserController@profile');
     Route::post('/profile', 'UserController@upload_avatar')->name('upload');
 
-/*Route::group(['middleware' => ['auth']], function (){*/
+Route::group(['middleware' => ['roles: 1']], function (){
 
     Route::resource('/userProfile', 'UserProfileController');
 
@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function (){
 
     Route::resource('/company', 'CompanyProfileController');*/
 
-/*});*/
+});
 
 Route::resource('/comment', 'CommentController', ['only' => ['update', 'destroy']]);
 
